@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import appointmentsRouter from './appointmentsRoutes';
+import usersRouter from './usersRoutes';
 
 const routes = Router();
 
 routes.use('/appointments', appointmentsRouter);
-//  Aqui, o use é porque podemos usar TODAS as rotas que forem inseridas no interior do ./appointments.routes
-//  e ele passa o '/appointments' para o Router
+routes.use('/users', usersRouter);
 
 export default routes;

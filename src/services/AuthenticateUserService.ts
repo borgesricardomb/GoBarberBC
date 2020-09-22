@@ -1,6 +1,7 @@
 import { compare } from 'bcryptjs';
 import { getRepository } from 'typeorm';
-import { sign, verify } from 'jsonwebtoken';
+import { sign } from 'jsonwebtoken';
+import authConfig from '../config/auth';
 
 import User from '../models/User';
 
@@ -33,9 +34,9 @@ class AuthenticateUserService {
     // Primeiro parâmetro - payload: informações do usuário para usar depois (não é recomendado usar senha)
     // Segundo parâmetro - string: chave secreta do site/aplicação
     // Terceiro parâmetro - configurações do token (expiresIn: tempo que o token vai durar)
-    const token = sign({}, '1as1hisi1sbqus1i232n31', {
+    const token = sign({}, authConfig.jwt.secret, {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn: authConfig.jwt.expiresIn,
     });
 
     return {
